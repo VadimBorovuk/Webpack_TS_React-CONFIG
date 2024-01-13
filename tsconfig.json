@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "outDir": "./build/",
+    "noImplicitAny": true,
+    "module": "ESNext",
+    "target": "es5",
+    "jsx": "react-jsx", /*for version 18 / don't import need React*/
+    "allowJs": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true, /*can work with import - export instead of require - module.exports*/
+    "allowSyntheticDefaultImports": true /*can work with import without * as ... */
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
+}
