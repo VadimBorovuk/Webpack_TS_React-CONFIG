@@ -1,10 +1,10 @@
 import webpack from 'webpack'
-import path from "path";
 
 import {buildLoaders} from "./buildLoaders";
 import {buildDevServer} from "./buildDevServer";
 import {buildPlugins} from "./buildPlugins";
 import {buildResolves} from "./buildResolves";
+
 import {BuildOptions} from "./types/types";
 
 
