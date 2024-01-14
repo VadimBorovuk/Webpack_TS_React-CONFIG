@@ -5,6 +5,15 @@ import {BuildOptions} from "./types/types";
 export function buildLoaders(options: BuildOptions): ModuleOptions['rules']{
     const isProd = options.mode === 'production'
 
+    const cssLoadersWithModules = {
+        loader: 'css-loader',
+        options:{
+            modules: {
+                localIdentName: isProd ? '[hash:base64:8]' : '[path][name]__[local]'
+            }
+        }
+    }
+
     const scssLoader ={
         test: /\.s[ac]ss$/i,
         use: [
@@ -12,7 +21,7 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules']{
             isProd ? MiniCssExtractPlugin.loader : "style-loader",
             /* MiniCssExtractPlugin for create minimyze file css */
             // Translates CSS into CommonJS
-            "css-loader",
+            cssLoadersWithModules,
             // Compiles Sass to CSS
             "sass-loader",
         ],
