@@ -4,7 +4,7 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 
 import {Suspense} from 'react'
 
-import {LazyAbout} from "g/pages/about/About.lazy";
+import {LazyAbout} from "@/pages/about/About.lazy";
 import {LazyShop} from "@/pages/shop/Shop.lazy";
 
 const root = document.getElementById('root')
