@@ -7,5 +7,7 @@ export function buildDevServer(options: BuildOptions): DevServerConfiguration{
         port: options.port ?? 3003,
         open: true,
         static: './build',
+        /*work only for development*/
+        historyApiFallback: true
     }
 }
