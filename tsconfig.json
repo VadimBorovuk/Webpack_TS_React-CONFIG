@@ -8,7 +8,12 @@
     "allowJs": true,
     "moduleResolution": "node",
     "esModuleInterop": true, /*can work with import - export instead of require - module.exports*/
-    "allowSyntheticDefaultImports": true /*can work with import without * as ... */
+    "allowSyntheticDefaultImports": true, /*can work with import without * as ... */
+    /*alias*/
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "baseUrl": "."
   },
   "ts-node": {
     "compilerOptions": {

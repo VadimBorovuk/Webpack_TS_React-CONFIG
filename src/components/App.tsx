@@ -8,10 +8,7 @@ export const App = () => {
     let [count, setCount] = useState<number>(0)
 
     const addCount = () =>{
-
         setCount(prev => prev + 1 )
-
-        console.log(classes)
     }
 
     return (

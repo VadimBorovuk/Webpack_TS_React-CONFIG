@@ -7,6 +7,7 @@ import {BuildMode} from "./config/build/types/types";
 interface IEnvArea {
     mode: BuildMode, /*npm run start -- --env mode=production*/
     port: 3001  /*npm run start -- --env port=1111*/
+    analyzer: boolean
 }
 
 export default (env: IEnvArea) => {
@@ -20,6 +21,8 @@ export default (env: IEnvArea) => {
             html: path.resolve(__dirname, 'public', 'index.html'),
             entry: path.resolve(__dirname, 'src', 'index.tsx'),
             output: path.resolve(__dirname, 'build'),
-        }
+            src: path.resolve(__dirname, 'src')
+        },
+        analyzer: env.analyzer
     })
 }

@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack serve --open --env mode=development",
     "build:dev": "webpack --env mode=development",
-    "build:prod": "webpack --env mode=production"
+    "build:prod": "webpack --env mode=production",
+    "build:prod_analize": "npm run build:prod -- --env analyzer=true"
   },
   "keywords": [
     "React",
@@ -20,6 +21,7 @@
     "@types/react": "^18.2.47",
     "@types/react-dom": "^18.2.18",
     "@types/webpack": "^5.28.3",
+    "@types/webpack-bundle-analyzer": "^4.6.3",
     "@types/webpack-dev-server": "^4.7.2",
     "css-loader": "^6.9.0",
     "html-webpack-plugin": "^5.5.3",
@@ -31,6 +33,7 @@
     "ts-node": "^10.9.1",
     "typescript": "^5.3.3",
     "webpack": "^5.89.0",
+    "webpack-bundle-analyzer": "^4.10.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
   },
