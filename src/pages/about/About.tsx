@@ -1,9 +1,15 @@
 import React from 'react';
+import classes from "@/components/App.module.scss";
 
 const About = () => {
+
     return (
         <div>
-            About of app
+            <p className={classes.icon}>
+                {
+                    __PLATFORM__ === 'desktop' ? 'desktop' : 'mobile'
+                }
+            </p>
         </div>
     );
 };

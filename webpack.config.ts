@@ -1,13 +1,14 @@
 import path from 'path'
 import webpack from 'webpack'
 import {buildWebpack} from "./config/build/buildWebpack";
-import {BuildMode} from "./config/build/types/types";
+import {BuildMode, BuildPlatform} from "./config/build/types/types";
 
 
 interface IEnvArea {
-    mode: BuildMode, /*npm run start -- --env mode=production*/
-    port: 3001  /*npm run start -- --env port=1111*/
-    analyzer: boolean
+    mode?: BuildMode, /*npm run start -- --env mode=production*/
+    port?: 3001  /*npm run start -- --env port=1111*/
+    analyzer?: boolean,
+    platform?: BuildPlatform
 }
 
 export default (env: IEnvArea) => {
@@ -23,6 +24,7 @@ export default (env: IEnvArea) => {
             output: path.resolve(__dirname, 'build'),
             src: path.resolve(__dirname, 'src')
         },
-        analyzer: env.analyzer
+        analyzer: env.analyzer,
+        platform: env.platform ?? 'desktop'
     })
 }
