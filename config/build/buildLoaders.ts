@@ -2,19 +2,19 @@ import {ModuleOptions} from 'webpack'
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import {BuildOptions} from "./types/types";
 
-export function buildLoaders(options: BuildOptions): ModuleOptions['rules']{
+export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
     const isProd = options.mode === 'production'
 
     const cssLoadersWithModules = {
         loader: 'css-loader',
-        options:{
+        options: {
             modules: {
                 localIdentName: isProd ? '[hash:base64:8]' : '[path][name]__[local]'
             }
         }
     }
 
-    const scssLoader ={
+    const scssLoader = {
         test: /\.s[ac]ss$/i,
         use: [
             // Creates `style` nodes from JS strings
@@ -34,12 +34,39 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules']{
         exclude: /node_modules/,
     }
 
-    return  [
+    const assetLoader = {
+        test: /\.(png|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+
+    }
+
+    const svgrLoader = {
+        test: /\.svg$/i,
+        use: [
+            {
+                loader: '@svgr/webpack',
+                options: {
+                    icon: true,
+                    svgoConfig: {
+                        plugins: [
+                            {
+                                name: 'convertColors',
+                                params: {
+                                    currentColor: true
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    }
+
+    return [
         // порядок має значення
-        // {
-        //     test: /\.css$/i,
-        //     use: ["style-loader", "css-loader"],
-        // },
-        scssLoader, tsLoader
+        scssLoader,
+        tsLoader,
+        assetLoader,
+        svgrLoader
     ]
 }
