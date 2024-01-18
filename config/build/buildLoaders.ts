@@ -39,42 +39,6 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
     //     }
     // }
 
-    const tsLoader = {
-        /*typescript can work with format jsx*/
-        /*if we don't use typescript we must need use babel-loader*/
-        test: /\.tsx?$/,
-        exclude: /node_modules/,
-        use: [
-            {
-                loader: 'ts-loader',
-                options: {
-                    transpileOnly: !isProd,
-                    getCustomTransformers: () => ({
-                        before: [!isProd && ReactRefreshTypescript()].filter(Boolean)
-                    })
-                }
-            }
-        ]
-    }
-
-    const babelLoader =  {
-        test: /\.tsx?$/,
-        exclude: /node_modules/,
-        use: {
-            loader: 'babel-loader',
-            options: {
-                presets: [
-                    [
-                        '@babel/preset-env',
-                        '@babel/preset-typescript',
-                        '@babel/preset-react'
-                    ]
-                ]
-            }
-        }
-    }
-
-
     const assetLoader = {
         test: /\.(png|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
@@ -101,6 +65,47 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
                 }
             }
         ]
+    }
+
+    const tsLoader = {
+        /*typescript can work with format jsx*/
+        /*if we don't use typescript we must need use babel-loader*/
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: [
+            {
+                loader: 'ts-loader',
+                options: {
+                    transpileOnly: !isProd,
+                    getCustomTransformers: () => ({
+                        before: [!isProd && ReactRefreshTypescript()].filter(Boolean)
+                    })
+                }
+            }
+        ]
+    }
+
+    const babelLoader =  {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: {
+            loader: 'babel-loader',
+
+            /*or in file babel.config.json*/
+
+            // options: {
+            //     presets: [
+            //         '@babel/preset-env',
+            //         '@babel/preset-typescript',
+            //         [
+            //             '@babel/preset-react',
+            //             {
+            //                 runtime: !isProd ? 'automatic': 'classic'
+            //             }
+            //         ]
+            //     ]
+            // }
+        }
     }
 
     return [
