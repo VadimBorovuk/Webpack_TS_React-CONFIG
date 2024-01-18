@@ -26,12 +26,30 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
             "sass-loader",
         ],
     }
+    // const tsLoader = {
+    //     /*typescript can work with format jsx*/
+    //     /*if we don't use typescript we must need use babel-loader*/
+    //     test: /\.tsx?$/,
+    //     use: 'ts-loader',
+    //     exclude: /node_modules/,
+    //     options:{
+    //         transpileOnly: true
+    //     }
+    // }
+
     const tsLoader = {
         /*typescript can work with format jsx*/
         /*if we don't use typescript we must need use babel-loader*/
         test: /\.tsx?$/,
-        use: 'ts-loader',
         exclude: /node_modules/,
+        use: [
+            {
+                loader: 'ts-loader',
+                options: {
+                    transpileOnly: !isProd
+                }
+            }
+        ]
     }
 
     const assetLoader = {

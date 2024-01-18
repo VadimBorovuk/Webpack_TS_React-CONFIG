@@ -9,7 +9,8 @@
     "build:prod": "webpack --env mode=production",
     "build:prod_analize": "npm run build:prod -- --env analyzer=true",
     "build:mobile": "npm run build:prod -- --env platform=mobile",
-    "build:desktop": "npm run build:prod -- --env platform=desktop"
+    "build:desktop": "npm run build:prod -- --env platform=desktop",
+    "typecheck": "tsc"
   },
   "keywords": [
     "React",
@@ -27,6 +28,7 @@
     "@types/webpack-dev-server": "^4.7.2",
     "css-loader": "^6.9.0",
     "file-loader": "^6.2.0",
+    "fork-ts-checker-webpack-plugin": "^9.0.2",
     "html-webpack-plugin": "^5.5.3",
     "mini-css-extract-plugin": "^2.7.7",
     "sass": "^1.69.7",

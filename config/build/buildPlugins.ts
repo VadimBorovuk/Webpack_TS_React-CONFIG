@@ -4,6 +4,7 @@ import HtmlWebpackPlugin from "html-webpack-plugin";
 import {BuildOptions} from "./types/types";
 
 import {BundleAnalyzerPlugin} from "webpack-bundle-analyzer";
+import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 
 export function buildPlugins(options: BuildOptions): Configuration['plugins']{
     const isDev = options.mode === 'development'
@@ -16,11 +17,14 @@ export function buildPlugins(options: BuildOptions): Configuration['plugins']{
         new DefinePlugin({
             __PLATFORM__: JSON.stringify(options.platform),
             __DEV__: JSON.stringify(options.mode),
-        })
+        }),
     ]
 
     if(isDev){
         plugins.push(new webpack.ProgressPlugin())
+
+        /*for check errors with start devserver of development*/
+        plugins.push(new ForkTsCheckerWebpackPlugin())
     }
 
     if(isProd){
