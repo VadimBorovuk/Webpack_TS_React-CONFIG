@@ -15,13 +15,12 @@ export const App = () => {
         setCount(prev => prev + 1)
     }
 
-
     return (
         <div className={classes.main}>eqwe
             <h1>{__DEV__}</h1>
             <img src={iconPng} alt="" width={100} height={100}/>
 
-                <WebpackSvg className={classes.icon} width={250} height={250} />
+            <WebpackSvg className={classes.icon} width={250} height={250}/>
             <Link to={'/about'}>About</Link>
             <Link to={'/shop'}>Shop</Link>
             <div className={classes.test}>
