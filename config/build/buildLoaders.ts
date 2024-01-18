@@ -1,6 +1,8 @@
 import {ModuleOptions} from 'webpack'
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import {BuildOptions} from "./types/types";
+import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
+import ReactRefreshTypescript from "react-refresh-typescript";
 
 export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
     const isProd = options.mode === 'production'
@@ -46,7 +48,10 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
             {
                 loader: 'ts-loader',
                 options: {
-                    transpileOnly: !isProd
+                    transpileOnly: !isProd,
+                    getCustomTransformers: () => ({
+                        before: [!isProd && ReactRefreshTypescript()].filter(Boolean)
+                    })
                 }
             }
         ]

@@ -8,6 +8,7 @@ export function buildDevServer(options: BuildOptions): DevServerConfiguration{
         open: true,
         static: './build',
         /*work only for development*/
-        historyApiFallback: true
+        historyApiFallback: true,
+        hot: true
     }
 }

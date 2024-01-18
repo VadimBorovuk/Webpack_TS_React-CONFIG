@@ -5,18 +5,22 @@ import {BuildOptions} from "./types/types";
 
 import {BundleAnalyzerPlugin} from "webpack-bundle-analyzer";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
+import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
+import path from "path";
+import CopyPlugin from "copy-webpack-plugin";
 
-export function buildPlugins(options: BuildOptions): Configuration['plugins']{
-    const isDev = options.mode === 'development'
-    const isProd = options.mode === 'production'
+export function buildPlugins({mode, paths, analyzer, platform}: BuildOptions): Configuration['plugins']{
+    const isDev = mode === 'development'
+    const isProd = mode === 'production'
 
     const plugins: Configuration['plugins'] = [
         new HtmlWebpackPlugin({
-            template: options.paths.html
+            template: paths.html,
+            favicon: path.resolve(paths.public, 'favicon.ico')
         }),
         new DefinePlugin({
-            __PLATFORM__: JSON.stringify(options.platform),
-            __DEV__: JSON.stringify(options.mode),
+            __PLATFORM__: JSON.stringify(platform),
+            __DEV__: JSON.stringify(mode),
         }),
     ]
 
@@ -25,6 +29,8 @@ export function buildPlugins(options: BuildOptions): Configuration['plugins']{
 
         /*for check errors with start devserver of development*/
         plugins.push(new ForkTsCheckerWebpackPlugin())
+
+        plugins.push(new ReactRefreshWebpackPlugin())
     }
 
     if(isProd){
@@ -32,10 +38,14 @@ export function buildPlugins(options: BuildOptions): Configuration['plugins']{
             filename: "css/[name].[contenthash:5].css",
             chunkFilename: "css/[name].[contenthash:5].css",
         }))
-
+        plugins.push(new CopyPlugin({
+            patterns: [
+                {from: path.resolve(paths.public, 'locales'), to: path.resolve(paths.output, 'locales')}
+            ]
+        }))
     }
 
-    if(options.analyzer){
+    if(analyzer){
         plugins.push(new BundleAnalyzerPlugin())
     }
 
