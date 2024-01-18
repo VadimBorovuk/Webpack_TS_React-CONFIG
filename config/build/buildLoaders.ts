@@ -57,6 +57,24 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
         ]
     }
 
+    const babelLoader =  {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: {
+            loader: 'babel-loader',
+            options: {
+                presets: [
+                    [
+                        '@babel/preset-env',
+                        '@babel/preset-typescript',
+                        '@babel/preset-react'
+                    ]
+                ]
+            }
+        }
+    }
+
+
     const assetLoader = {
         test: /\.(png|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
@@ -88,7 +106,8 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
     return [
         // порядок має значення
         scssLoader,
-        tsLoader,
+        // tsLoader,
+        babelLoader,
         assetLoader,
         svgrLoader
     ]

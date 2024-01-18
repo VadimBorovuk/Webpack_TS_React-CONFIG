@@ -16,7 +16,7 @@ export const App = () => {
     }
 
     return (
-        <div className={classes.main}>eqwe
+        <div className={classes.main}>
             <h1>{__DEV__}</h1>
             <img src={iconPng} alt="" width={100} height={100}/>
 
