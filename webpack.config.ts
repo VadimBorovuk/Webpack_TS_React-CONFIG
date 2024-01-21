@@ -26,6 +26,6 @@ export default (env: IEnvArea) => {
             src: path.resolve(__dirname, 'src')
         },
         analyzer: env.analyzer,
-        platform: env.platform ?? 'desktop'
+        platform: env.platform ?? 'desktop',
     })
 }
