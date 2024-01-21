@@ -19,16 +19,8 @@ import WebpackSvg from '@/assets/caled.svg'
 
 export const App = () => {
 
-    const func1 = () => {
-        func2()
-    }
-    const func2 = () => {
-        throw new Error()
-    }
-
     let [count, setCount] = useState<number>(0)
     const addCount = () => {
-        func1()
         setCount(prev => prev + 1)
     }
 
