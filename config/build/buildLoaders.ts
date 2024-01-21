@@ -3,6 +3,7 @@ import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import {BuildOptions} from "./types/types";
 import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
 import ReactRefreshTypescript from "react-refresh-typescript";
+import {buildBabelLoader} from "./babel/buildBabelLoader";
 
 export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
     const isProd = options.mode === 'production'
@@ -85,28 +86,7 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
         ]
     }
 
-    const babelLoader =  {
-        test: /\.tsx?$/,
-        exclude: /node_modules/,
-        use: {
-            loader: 'babel-loader',
-
-            /*or in file babel.config.json*/
-
-            // options: {
-            //     presets: [
-            //         '@babel/preset-env',
-            //         '@babel/preset-typescript',
-            //         [
-            //             '@babel/preset-react',
-            //             {
-            //                 runtime: !isProd ? 'automatic': 'classic'
-            //             }
-            //         ]
-            //     ]
-            // }
-        }
-    }
+    const babelLoader = buildBabelLoader(options)
 
     return [
         // порядок має значення

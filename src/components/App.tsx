@@ -8,15 +8,32 @@ import iconPng from '@/assets/sports.png'
 
 import WebpackSvg from '@/assets/caled.svg'
 
+
+// function func1() {
+//     func2()
+// }
+//
+// function func2() {
+//     func2()
+// }
+
 export const App = () => {
+
+    const func1 = () => {
+        func2()
+    }
+    const func2 = () => {
+        throw new Error()
+    }
 
     let [count, setCount] = useState<number>(0)
     const addCount = () => {
+        func1()
         setCount(prev => prev + 1)
     }
 
     return (
-        <div className={classes.main}>
+        <div data-testid={'App'} className={classes.main}>
             <h1>{__DEV__}</h1>
             <img src={iconPng} alt="" width={100} height={100}/>
 

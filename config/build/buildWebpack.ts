@@ -29,7 +29,7 @@ export function buildWebpack(options: BuildOptions):webpack.Configuration {
             clean: true /*clean all files in folder(main) but not current(main.js)*/
         },
 
-        devtool: isDev && 'inline-source-map',
+        devtool: isDev ? 'inline-source-map' : 'source-map',
 
         /*for watching change in realtime*/
         devServer: isDev ? buildDevServer(options) : undefined,
